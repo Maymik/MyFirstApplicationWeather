@@ -234,6 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     reader.close();
                 } catch (IOException e) {
                     e.printStackTrace();
+
                 }
             }
         }
