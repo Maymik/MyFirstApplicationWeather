@@ -1,7 +1,6 @@
 package com.kozyrev.myfirstapplication.screens;
 
-import android.content.Intent;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +8,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.gson.Gson;
 import com.kozyrev.myfirstapplication.R;
 import com.kozyrev.myfirstapplication.models.ApiType;
 import com.kozyrev.myfirstapplication.models.WeatherForecastModel;
@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -35,26 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     WeatherModel weather = null;
     WeatherForecastModel forecast = null;
-    Gson gson = new Gson();
+    RecyclerView recyclerView = null;
 
     Executor threadPool = Executors.newFixedThreadPool(5);
 
 
-    private View.OnClickListener button2Listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // implicit intent
-            Intent intent2 = new Intent(Intent.ACTION_VIEW);
-            // explicit intent
-            Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("mykey1", "mike");
-            //bundle.putSerializable("weather", weather);
-            bundle.putSerializable("WeatherForecastModel", forecast);
-            intent.putExtras(bundle);
-            MainActivity.this.startActivity(intent2);
-        }
-    };
+
 
 
     private View.OnClickListener button1Listener = new View.OnClickListener() {
@@ -122,21 +110,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     };
     private TextView textView;
     WeatherService ws = new WeatherApi().createWeatherService();
-
+    MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Button button = findViewById(R.id.button_id);
-        Button button2 = findViewById(R.id.button_id2);
         Button button3 = findViewById(R.id.button_id3);
+        recyclerView = findViewById(R.id.main_activity_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<String> list = new ArrayList<>();
+        list.add("mike");
+        list.add("serg");
+        list.add("marina");
+        adapter.setData(list);
+        recyclerView.setAdapter(adapter);
+        list.add("mark");
+        adapter.setData(list);
         textView = findViewById(R.id.text_view_id);
 
 
         button3.setOnClickListener(button3Listener);
         //this.
-        button2.setOnClickListener(button2Listener);
+
 
         //invokeMyMethod(this);
         button.setOnClickListener(button1Listener);
