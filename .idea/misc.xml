@@ -4,8 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/androidprojects/firstproject/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/androidprojects/firstproject/app/src/main/res/drawable/rain_icon.xml" value="0.1" />
+        <entry key="..\:/androidprojects/firstproject/app/src/main/res/layout/activity_forecast_main.xml" value="0.1" />
         <entry key="..\:/androidprojects/firstproject/app/src/main/res/layout/activity_main.xml" value="0.18" />
         <entry key="..\:/androidprojects/firstproject/app/src/main/res/layout/activity_second.xml" value="0.25" />
+        <entry key="..\:/androidprojects/firstproject/app/src/main/res/layout/forecast_recyclerview_row.xml" value="0.1" />
         <entry key="..\:/androidprojects/firstproject/app/src/main/res/layout/recyclerview_row.xml" value="0.1" />
       </map>
     </option>

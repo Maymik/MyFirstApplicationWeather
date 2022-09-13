@@ -8,10 +8,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kozyrev.myfirstapplication.R;
+import com.kozyrev.myfirstapplication.WeatherViewModel;
 import com.kozyrev.myfirstapplication.models.ApiType;
 import com.kozyrev.myfirstapplication.models.WeatherForecastModel;
 import com.kozyrev.myfirstapplication.models.WeatherModel;
@@ -141,6 +144,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View view = new TextView(this);
         View view2 = new TextView(this.getApplicationContext());
         Log.i("mytag", "my first line of code in on create");
+
+
+        ////
+
+
+        WeatherViewModel weatherViewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
+        weatherViewModel.getWeather().observe(this, new Observer<WeatherModel>() {
+            @Override
+            public void onChanged(WeatherModel weatherModel) {
+                updateUI(weatherModel);
+            }
+        });
+
+    }
+
+    private void updateUI(WeatherModel weatherModel) {
+        textView.setText("current weather: " + weatherModel);
     }
 
     private void invokeMyMethod(View.OnClickListener listener) {

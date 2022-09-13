@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/forecast_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: "
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/forecast_date_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/forecast_temperature_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Temperature: "
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/forecast_temperature_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_weight="1"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/forecast_weather_image"
+        android:src="@android:drawable/btn_minus"
+        android:layout_weight="1"/>
+
+</LinearLayout>
