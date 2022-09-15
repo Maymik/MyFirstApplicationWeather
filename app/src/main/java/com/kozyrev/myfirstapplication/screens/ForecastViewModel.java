@@ -28,26 +28,26 @@ public class ForecastViewModel extends ViewModel {
     public LiveData<WeatherForecastModel> getForecast() {
         if (mutableForecast == null) {
             mutableForecast = new MutableLiveData<>();
-            loadWeather();
+            loadWeather(50.450, 30.5234);
         }
         return mutableForecast;
     }
 
-    private void loadWeather() {
+    private void loadWeather(double latitude, double longitude) {
         threadPool.execute(new Runnable() {
             @Override
             public void run() {
-                WeatherForecastModel forecast = loadWeatherRetrofit();
+                WeatherForecastModel forecast = loadWeatherRetrofit(latitude, longitude);
                 mutableForecast.postValue(forecast);
 
             }
         });
     }
 
-    private WeatherForecastModel loadWeatherRetrofit() {
+    private WeatherForecastModel loadWeatherRetrofit(double latitude, double longitude) {
 
         try {
-            Response<WeatherForecastModel> response = ws.getForecast("50.450", "30.5234", "8aca3120b4fbe8b8b6dbeb584c7fc0e0").execute();
+            Response<WeatherForecastModel> response = ws.getForecast(String.valueOf(latitude), String.valueOf(longitude), "8aca3120b4fbe8b8b6dbeb584c7fc0e0").execute();
             if (response.isSuccessful()) {
                 WeatherForecastModel weatherForecastModel = response.body();
                 saveData(weatherForecastModel);
@@ -62,8 +62,9 @@ public class ForecastViewModel extends ViewModel {
 
     void saveData(WeatherForecastModel weatherForecastModel){
         // shared preferences
-        // file read write
+        // android file read write
         // sqlite database / room database
+        // select "mike" as user.name into table.users
         SharedPreferences sp = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -89,5 +90,10 @@ public class ForecastViewModel extends ViewModel {
 
     public void setContext(Context context) {
         this.context = context;
+    }
+
+    public void reloadWithLocation(double latitude, double longitude) {
+        loadWeather(latitude, longitude);
+
     }
 }
